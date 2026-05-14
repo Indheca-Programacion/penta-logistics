@@ -1,0 +1,20 @@
+.env
+# --- Nivel Raíz ---
+.DS_Store
+.env
+.vscode/
+
+# --- Base de Datos ---
+# Nunca subas los datos reales de Postgres
+postgres_data/
+
+# --- Backend (NestJS) ---
+backend/node_modules/
+backend/dist/
+backend/npm-debug.log*
+
+# --- Frontend (Vite + React) ---
+frontend/node_modules/
+frontend/dist/
+frontend/npm-debug.log*
+frontend/.eslintcache
