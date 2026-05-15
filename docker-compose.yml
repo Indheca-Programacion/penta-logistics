@@ -17,27 +17,37 @@ services:
 
   # Backend: API Node.js
   backend:
-    build: ./backend
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
     container_name: penta_api
     restart: always
     depends_on:
       - db
+    volumes:
+      - ./backend:/app:delegated    # ":delegated" mejora el rendimiento en Linux/Mac
+      - /app/node_modules           # Protege los módulos internos
     environment:
-      DATABASE_URL: postgresql://${DB_USER}:${DB_PASSWORD}@db:5432/penta_logistics_db
-      PORT: 3000
+      - DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@db:5432/penta_logistics_db
+      - PORT=3000
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true      # Ayuda a que Node detecte cambios de archivos
     ports:
       - "3000:3000"
     networks:
       - penta_network
-    command: npm run start:dev
-
   # Frontend: PWA servida por Apache
   frontend:
-    build: ./frontend
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
     container_name: penta_web
     restart: always
     ports:
       - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
     depends_on:
       - backend
     networks:
