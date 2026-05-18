@@ -14,10 +14,16 @@ export class Usuario {
   @Column({ length: 100 })
   nombre!: string;
 
+  @Column({ length: 100 })
+  apellidoPaterno!: string;
+
+  @Column({ length: 100 })
+  apellidoMaterno!: string;
+
   @Column({ length: 100, unique: true })
   email!: string;
 
-  @Column({ length: 255 })
+  @Column({ type: 'varchar', length: 255, select: false })
   password!: string;
 
   @Column({ type: 'boolean', default: true })
