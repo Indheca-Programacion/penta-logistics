@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Usuario } from './entities/usuario.entity';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { Repository } from 'typeorm';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class UsuariosService {
@@ -19,7 +20,11 @@ export class UsuariosService {
     if (existingUser) {
       throw new ConflictException('El correo electronico ya está registrado');
     }
-    const nuevoUsuario = this.usuariosRepository.create(createUsuarioDto);
+    const hashedPassword = await bcrypt.hash(createUsuarioDto.password, 10);
+    const nuevoUsuario = this.usuariosRepository.create({
+      ...createUsuarioDto,
+      password: hashedPassword,
+    });
     return this.usuariosRepository.save(nuevoUsuario);
   }
 
@@ -39,8 +44,11 @@ export class UsuariosService {
     if (!usuario) {
       throw new ConflictException('No se encontró el usuario');
     }
-    Object.assign(usuario, updateUsuarioDto);
-    return this.usuariosRepository.save(usuario);
+    await this.usuariosRepository.update(id, updateUsuarioDto);
+    return {
+      ...usuario,
+      isActive: updateUsuarioDto.isActive ?? usuario.isActive,
+    };
   }
 
   async remove(id: number): Promise<void> {
