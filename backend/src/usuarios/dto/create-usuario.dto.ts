@@ -1,4 +1,10 @@
-import { IsString, IsEmail, IsNotEmpty, MaxLength } from 'class-validator';
+import {
+  IsString,
+  IsEmail,
+  IsNotEmpty,
+  MaxLength,
+  IsBoolean,
+} from 'class-validator';
 
 export class CreateUsuarioDto {
   @IsString({ message: 'El nombre debe ser una cadena de texto' })
@@ -27,4 +33,9 @@ export class CreateUsuarioDto {
     message: 'La contraseña no puede tener más de 255 caracteres',
   })
   password!: string;
+
+  @IsBoolean({
+    message: 'El campo activo debe ser un valor booleano (true/false)',
+  })
+  isActive!: boolean;
 }
