@@ -20,6 +20,7 @@ import { UsuariosModule } from './usuarios/usuarios.module';
         username: configService.get<string>('DB_USER'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
+        timezone: 'America/Mexico_City',
         autoLoadEntities: true,
         synchronize: true,
         logging: true,
