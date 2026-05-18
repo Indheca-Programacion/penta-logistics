@@ -1,14 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { UsuariosService } from './usuarios.service';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
-import { Usuario } from './entities/usuario.entity';
+import { CreateUsuarioDto } from './dto/create-usuario.dto';
 
 @Controller('usuarios')
 export class UsuariosController {
   constructor(private readonly usuariosService: UsuariosService) {}
 
   @Post()
-  async create(@Body() userData: Partial<Usuario>) {
+  async create(@Body() userData: CreateUsuarioDto) {
     return this.usuariosService.create(userData);
   }
 
@@ -18,17 +26,20 @@ export class UsuariosController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
     return this.usuariosService.findOne(id);
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
+  async update(
+    @Param('id') id: number,
+    @Body() updateUsuarioDto: UpdateUsuarioDto,
+  ) {
     return this.usuariosService.update(id, updateUsuarioDto);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) {
+  async remove(@Param('id') id: number) {
     return this.usuariosService.remove(id);
   }
 }
