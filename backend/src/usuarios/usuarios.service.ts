@@ -51,11 +51,12 @@ export class UsuariosService {
     };
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: number): Promise<{ message: string }> {
     const usuario = await this.usuariosRepository.findOne({ where: { id } });
     if (!usuario) {
       throw new ConflictException('No se encontró el usuario');
     }
     await this.usuariosRepository.remove(usuario);
+    return { message: 'Usuario eliminado correctamente' };
   }
 }
