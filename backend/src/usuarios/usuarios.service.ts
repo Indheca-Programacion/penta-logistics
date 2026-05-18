@@ -17,7 +17,7 @@ export class UsuariosService {
       where: { email: createUsuarioDto.email },
     });
     if (existingUser) {
-      throw new ConflictException('Email already in use');
+      throw new ConflictException('El correo electronico ya está registrado');
     }
     const nuevoUsuario = this.usuariosRepository.create(createUsuarioDto);
     return this.usuariosRepository.save(nuevoUsuario);
@@ -37,7 +37,7 @@ export class UsuariosService {
   ): Promise<Usuario> {
     const usuario = await this.usuariosRepository.findOne({ where: { id } });
     if (!usuario) {
-      throw new Error('User not found');
+      throw new ConflictException('No se encontró el usuario');
     }
     Object.assign(usuario, updateUsuarioDto);
     return this.usuariosRepository.save(usuario);
@@ -46,7 +46,7 @@ export class UsuariosService {
   async remove(id: number): Promise<void> {
     const usuario = await this.usuariosRepository.findOne({ where: { id } });
     if (!usuario) {
-      throw new Error('User not found');
+      throw new ConflictException('No se encontró el usuario');
     }
     await this.usuariosRepository.remove(usuario);
   }
