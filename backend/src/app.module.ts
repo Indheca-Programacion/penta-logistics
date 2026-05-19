@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { RolesModule } from './roles/roles.module';
+import { PermisosModule } from './permisos/permisos.module';
 
 @Module({
   imports: [
@@ -31,8 +30,7 @@ import { RolesModule } from './roles/roles.module';
     }),
     UsuariosModule,
     RolesModule,
+    PermisosModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
