@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsuariosService } from '../usuarios/usuarios.service';
 import * as bcrypt from 'bcryptjs';
+import { AuthPayloadDTO } from './dto/auth.dto';
+
 
 @Injectable()
 export class AuthService {
@@ -11,9 +13,10 @@ export class AuthService {
   ) {}
 
   // 1. Validar si el usuario existe y la contraseña coincide
-  async validateUser(username: string, pass: string): Promise<any> {
-    const user = await this.usuariosService.findOneToLogin(username);
-    const isMatch = user && (await bcrypt.compare(pass, user.password));
+  async validateUser(auth: AuthPayloadDTO): Promise<any> {
+    const user = await this.usuariosService.findOneToLogin(auth.username);
+    const isMatch =
+      user && (await bcrypt.compare(auth.password, user.password));
     if (isMatch) {
       return { id: user.id, username: user.username };
     }
@@ -22,7 +25,7 @@ export class AuthService {
 
   // 2. Generar el JWT tras un login exitoso
   login(user: any) {
-    const payload = { username: user.username, sub: user.id };
+    const payload = { username: user.username, id: user.id };
     return {
       access_token: this.jwtService.sign(payload),
     };

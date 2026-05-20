@@ -1,24 +1,25 @@
-import { Controller, Post, UseGuards, Request, Get } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import { Controller, Post, UseGuards, Req, Get, Body } from '@nestjs/common';
+import { Request } from 'express';
 import { AuthService } from './auth.service';
+import { LocalAuthGuard } from './guards/local.guards';
+import { AuthPayloadDTO } from './dto/auth.dto';
+import { JwtAuthGuard } from './jwt-auth.guard';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
   // POST /auth/login -> Usa la estrategia Local
-  @UseGuards(AuthGuard('local'))
+  @UseGuards(LocalAuthGuard)
   @Post('login')
-  async login(@Request() req) {
-    // Si llega aquí, significa que LocalStrategy.validate() fue exitoso
-    // y guardó al usuario en req.user
-    return this.authService.login(req.user);
+  login(@Body() AuthPayloadDTO: AuthPayloadDTO) {
+    return this.authService.login(AuthPayloadDTO);
   }
 
   // GET /auth/perfil -> Usa la estrategia JWT (Ruta Protegida)
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(JwtAuthGuard)
   @Get('perfil')
-  getProfile(@Request() req) {
+  getProfile(@Req() req: Request & { user: AuthPayloadDTO }) {
     // Devuelve los datos del token decodificado
     return req.user;
   }
