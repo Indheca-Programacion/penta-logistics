@@ -7,9 +7,18 @@ import {
 } from 'class-validator';
 
 export class CreateUsuarioDto {
+  @IsString({ message: 'El nombre de usuario debe ser una cadena de texto' })
+  @IsNotEmpty({ message: 'El nombre de usuario es obligatorio' })
+  @MaxLength(50, {
+    message: 'El nombre de usuario no puede tener más de 50 caracteres',
+  })
+  username!: string;
+
   @IsString({ message: 'El nombre debe ser una cadena de texto' })
   @IsNotEmpty({ message: 'El nombre es obligatorio' })
-  @MaxLength(100, { message: 'El nombre no puede tener más de 100 caracteres' })
+  @MaxLength(100, {
+    message: 'El nombre no puede tener más de 100 caracteres',
+  })
   nombre!: string;
 
   @IsNotEmpty({ message: 'El apellido paterno es obligatorio' })
