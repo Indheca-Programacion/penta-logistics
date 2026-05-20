@@ -59,4 +59,12 @@ export class UsuariosService {
     await this.usuariosRepository.remove(usuario);
     return { message: 'Usuario eliminado correctamente' };
   }
+
+  async findOneToLogin(username: string): Promise<Usuario | null> {
+    return this.usuariosRepository
+      .createQueryBuilder('usuario')
+      .where('usuario.username = :username', { username })
+      .addSelect('usuario.password')
+      .getOne();
+  }
 }
