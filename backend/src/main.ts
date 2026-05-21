@@ -11,6 +11,7 @@ async function bootstrap() {
       transform: true, // Transforma los tipos automáticamente (ej. string a number)
     }),
   );
+  app.setGlobalPrefix('api/v1'); // Prefijo global para todas las rutas (ej. /api/auth/login)
   app.enableCors({
     origin: [process.env.frontend_url, process.env.backend_url], // Permite solicitudes solo desde el frontend
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
