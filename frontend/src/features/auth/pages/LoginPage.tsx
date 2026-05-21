@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom';
-import { Eye, EyeOff, Lock, Mail, Loader2 } from 'lucide-react';
+import { Eye, EyeOff, Lock, Loader2, User } from 'lucide-react';
 import { loginSchema, LoginFormData } from '../schemas/loginSchema';
 import { useAuthStore } from '@/store/authStore';
 import { api } from '@/config/api';
@@ -75,26 +75,27 @@ export default function LoginPage() {
         <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div className="space-y-4">
             
-            {/* Campo Correo Electrónico */}
+            {/* Campo Usuario */}
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1">
-                Correo Electrónico
+                Usuario
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-slate-400" />
+                  <User className="h-5 w-5 text-slate-400" />
                 </div>
                 <input
-                  {...register('email')}
-                  type="email"
+                  {...register('username')}
+                  type="text"
                   className={`block w-full pl-10 pr-3 py-2.5 border rounded-lg bg-slate-50 placeholder-slate-400 text-slate-900 focus:outline-none focus:ring-2 focus:bg-white transition-all text-sm ${
-                    errors.email ? 'border-red-400 focus:ring-red-100' : 'border-slate-200 focus:ring-indigo-100 focus:border-indigo-500'
+                    errors.username ? 'border-red-400 focus:ring-red-100' : 'border-slate-200 focus:ring-indigo-100 focus:border-indigo-500'
                   }`}
-                  placeholder="usuario@empresa.com"
+                  placeholder="usuario"
+                  autoComplete="username"
                 />
               </div>
-              {errors.email && (
-                <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>
+              {errors.username && (
+                <p className="mt-1 text-xs text-red-500">{errors.username.message}</p>
               )}
             </div>
 
@@ -114,6 +115,7 @@ export default function LoginPage() {
                     errors.password ? 'border-red-400 focus:ring-red-100' : 'border-slate-200 focus:ring-indigo-100 focus:border-indigo-500'
                   }`}
                   placeholder="••••••••"
+                  autoComplete="current-password"
                 />
                 <button
                   type="button"
