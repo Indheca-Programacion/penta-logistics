@@ -44,9 +44,16 @@ export class UsuariosService {
     if (!usuario) {
       throw new ConflictException('No se encontró el usuario');
     }
-    await this.usuariosRepository.update(id, updateUsuarioDto);
+    const hashedPassword = updateUsuarioDto.password
+      ? await bcrypt.hash(updateUsuarioDto.password, 10)
+      : undefined;
+    await this.usuariosRepository.update(id, {
+      ...updateUsuarioDto,
+      password: hashedPassword,
+    });
     return {
       ...usuario,
+      password: hashedPassword ?? usuario.password,
       isActive: updateUsuarioDto.isActive ?? usuario.isActive,
     };
   }
