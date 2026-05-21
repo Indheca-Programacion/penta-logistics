@@ -1,20 +1,31 @@
-import { LayoutDashboard, Package, Receipt, Users, Settings } from 'lucide-react';
+import {
+  ClipboardList,
+  FileCheck,
+  FileText,
+  LayoutDashboard,
+  Truck,
+  UserCog,
+  Users,
+} from 'lucide-react';
 
 export function Sidebar() {
   // En el futuro, estos enlaces pueden filtrarse por los roles del usuario (RBAC)
   const menuItems = [
     { title: 'Dashboard', icon: LayoutDashboard, path: '/' },
-    { title: 'Inventario', icon: Package, path: '/inventario' },
-    { title: 'Facturación', icon: Receipt, path: '/facturacion' },
+    { title: 'Traslados', icon: Truck, path: '/traslado' },
+    { title: 'Requisiciones', icon: ClipboardList, path: '/requisiciones' },
+    { title: 'Comprobaciones', icon: FileCheck, path: '/comprobaciones' },
+    { title: 'Facturas', icon: FileText, path: '/facturas' },
     { title: 'Usuarios', icon: Users, path: '/usuarios' },
-    { title: 'Configuración', icon: Settings, path: '/configuracion' },
+    { title: 'Personal Operativo', icon: UserCog, path: '/personal-operativo' },
+    { title: 'Unidades', icon: Truck, path: '/unidades' },
   ];
 
   return (
     <aside className="w-64 bg-slate-900 text-slate-100 min-h-screen flex flex-col border-r border-slate-800">
       {/* Logo / Nombre del ERP */}
       <div className="h-16 flex items-center px-6 border-b border-slate-800">
-        <span className="text-xl font-bold tracking-wider text-indigo-400">PENTA ERP</span>
+        <span className="text-xl font-bold tracking-wider text-indigo-400">PENTA Logistics</span>
       </div>
 
       {/* Menú de Navegación */}
