@@ -1,9 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsuariosService } from '../usuarios/usuarios.service';
 import * as bcrypt from 'bcryptjs';
 import { AuthPayloadDTO } from './dto/auth.dto';
-
 
 @Injectable()
 export class AuthService {
@@ -20,7 +19,9 @@ export class AuthService {
     if (isMatch) {
       return { id: user.id, username: user.username };
     }
-    return null;
+    throw new UnauthorizedException(
+      'El usuario o la contraseña son incorrectos',
+    );
   }
 
   // 2. Generar el JWT tras un login exitoso
