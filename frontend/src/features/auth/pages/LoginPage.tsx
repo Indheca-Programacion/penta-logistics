@@ -51,13 +51,13 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
-      <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+    <div className="min-h-screen flex items-center justify-center bg-brand-background px-4">
+      <div className="max-w-md w-full space-y-8 bg-brand-surface p-8 rounded-2xl shadow-sm border border-brand-primary">
         
         {/* Encabezado */}
         <div className="text-center">
-          <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
-            PENTA <span className="text-indigo-600">ERP</span>
+          <h2 className="text-3xl font-extrabold text-brand-text tracking-tight">
+            PENTA <span className="text-brand-secondary">ERP</span>
           </h2>
           <p className="mt-2 text-sm text-slate-500">
             Ingresa tus credenciales para acceder al sistema
@@ -77,18 +77,18 @@ export default function LoginPage() {
             
             {/* Campo Usuario */}
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium text-brand-text mb-1">
                 Usuario
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <User className="h-5 w-5 text-slate-400" />
+                  <User className="h-5 w-5 text-brand-primary" />
                 </div>
                 <input
                   {...register('username')}
                   type="text"
                   className={`block w-full pl-10 pr-3 py-2.5 border rounded-lg bg-slate-50 placeholder-slate-400 text-slate-900 focus:outline-none focus:ring-2 focus:bg-white transition-all text-sm ${
-                    errors.username ? 'border-red-400 focus:ring-red-100' : 'border-slate-200 focus:ring-indigo-100 focus:border-indigo-500'
+                    errors.username ? 'border-red-400 focus:ring-red-100' : 'border-slate-200 focus:ring-brand-accent focus:border-brand-accent'
                   }`}
                   placeholder="usuario"
                   autoComplete="username"
@@ -101,25 +101,25 @@ export default function LoginPage() {
 
             {/* Campo Contraseña */}
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium text-brand-text mb-1">
                 Contraseña
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-slate-400" />
+                  <Lock className="h-5 w-5 text-brand-primary" />
                 </div>
                 <input
                   {...register('password')}
                   type={showPassword ? 'text' : 'password'}
                   className={`block w-full pl-10 pr-10 py-2.5 border rounded-lg bg-slate-50 placeholder-slate-400 text-slate-900 focus:outline-none focus:ring-2 focus:bg-white transition-all text-sm ${
-                    errors.password ? 'border-red-400 focus:ring-red-100' : 'border-slate-200 focus:ring-indigo-100 focus:border-indigo-500'
+                    errors.password ? 'border-red-400 focus:ring-red-100' : 'border-slate-200 focus:ring-brand-accent focus:border-brand-accent'
                   }`}
                   placeholder="••••••••"
                   autoComplete="current-password"
                 />
                 <button
                   type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-brand-primary hover:text-brand-accent"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
@@ -136,7 +136,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="group relative w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+              className="group relative w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-brand-primary hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-accent transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <Loader2 className="h-5 w-5 animate-spin" />
