@@ -22,10 +22,10 @@ export function Sidebar() {
   ];
 
   return (
-    <aside className="w-64 bg-slate-900 text-slate-100 min-h-screen flex flex-col border-r border-slate-800">
+    <aside className="w-64 bg-brand-primary text-brand-text min-h-screen flex flex-col border-r border-slate-800">
       {/* Logo / Nombre del ERP */}
       <div className="h-16 flex items-center px-6 border-b border-slate-800">
-        <span className="text-xl font-bold tracking-wider text-indigo-400">PENTA Logistics</span>
+        <span className="text-xl font-bold tracking-wider text-brand-surface">PENTA Logistics</span>
       </div>
 
       {/* Menú de Navegación */}
@@ -36,9 +36,9 @@ export function Sidebar() {
             <a
               key={item.title}
               href={item.path}
-              className="flex items-center space-x-3 px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"
+              className="flex items-center space-x-3 px-4 py-3 rounded-lg text-brand-surface hover:bg-slate-800 hover:text-white transition-colors"
             >
-              <Icon className="h-5 w-5 text-indigo-400" />
+              <Icon className="h-5 w-5 text-brand-secondary" />
               <span className="text-sm font-medium">{item.title}</span>
             </a>
           );
