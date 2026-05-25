@@ -34,10 +34,10 @@ export default function LoginPage() {
       const response = await api.post('/auth/login', data); 
       
       // Desestructuramos lo que responda tu API (ajusta según tu backend)
-      const { user, token } = response.data;
+      const { username, access_token } = response.data;
 
       // Guardamos en el estado global de Zustand
-      loginGlobal(user, token);
+      loginGlobal( username, access_token);
       
       // Redirigimos al dashboard principal
       navigate('/');

@@ -4,20 +4,29 @@ import { Navbar } from '@/components/navigation/Navbar';
 
 export default function DashboardLayout() {
   return (
-    <div className="flex bg-slate-50 min-h-screen">
-      {/* Barra Lateral Fija */}
+    // bg-brand-background aplica el fondo grisáceo/azul claro que configuramos
+    <div className="flex h-screen w-screen overflow-hidden bg-brand-background text-brand-text">
+      
+      {/* 1. BARRA LATERAL (Fija a la izquierda) */}
       <Sidebar />
 
-      {/* Contenedor del contenido principal */}
-      <div className="flex-1 flex flex-col min-w-0">
+      {/* CONTENEDOR DERECHO (Navbar + Contenido) */}
+      <div className="flex flex-1 flex-col overflow-hidden">
+        
+        {/* 2. BARRA SUPERIOR (Fija arriba) */}
         <Navbar />
 
-        {/* Zona de contenido dinámico */}
-        <main className="flex-1 p-6 overflow-y-auto">
-          <div className="max-w-7xl mx-auto">
+        {/* 3. ZONA DE CONTENIDO DINÁMICO (Con scroll independiente) */}
+        <main className="flex-1 overflow-y-auto p-6">
+          {/* max-w-7xl limita el ancho en pantallas ultra anchas para no deformar las tablas */}
+          <div className="mx-auto max-w-7xl space-y-6">
+            
+            {/* Aquí es donde React Router inyectará las pantallas de tus módulos */}
             <Outlet />
+            
           </div>
         </main>
+        
       </div>
     </div>
   );

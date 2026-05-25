@@ -24,7 +24,7 @@ export function Sidebar() {
   return (
     <aside className="w-64 bg-brand-primary text-brand-text min-h-screen flex flex-col border-r border-slate-800">
       {/* Logo / Nombre del ERP */}
-      <div className="h-16 flex items-center px-6 border-b border-slate-800">
+      <div className="h-16 flex items-center px-6 border-b border-slate-800 bg-brand-primary">
         <span className="text-xl font-bold tracking-wider text-brand-surface">PENTA Logistics</span>
       </div>
 
