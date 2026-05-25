@@ -43,16 +43,18 @@ services:
     container_name: penta_web
     restart: always
     ports:
-      - "5173:5173"
+      - "3001:3000"
     volumes:
       - ./frontend:/app
       - /app/node_modules
+      - /app/.next
     depends_on:
       - backend
     networks:
       - penta_network
     environment:
       - CHOKIDAR_USEPOLLING=true # A veces necesario para el hot reload
+      - WATCHPACK_POLLING=true # Esto asegura que detecte tus cambios de código en Docker
 
 # Red interna para que los contenedores se hablen entre sí
 networks:
